@@ -10,7 +10,7 @@ pipeline {
                 checkout scm
             }
         }
-
+        
         stage('Run Tests') {
             steps {
                 dir('Lab/Lab6') {
@@ -22,6 +22,9 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 junit 'Lab/Lab6/target/surefire-reports/*.xml'
+
+                archiveArtifacts artifacts: 'Lab/Lab6/target/surefire-reports/*.xml',
+                                 fingerprint: true
             }
         }
     }
