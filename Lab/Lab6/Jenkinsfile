@@ -13,7 +13,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                dir('lab6') {
+                dir('Lab/Lab6') {
                     sh 'mvn clean test'
                 }
             }
@@ -21,7 +21,7 @@ pipeline {
 
         stage('Publish Test Results') {
             steps {
-                junit 'lab6/target/surefire-reports/*.xml'
+                junit 'Lab/Lab6/target/surefire-reports/*.xml'
             }
         }
     }
