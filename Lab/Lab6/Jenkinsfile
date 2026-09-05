@@ -1,0 +1,28 @@
+pipeline {
+    agent {
+        label 'docker-agent'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                dir('lab6') {
+                    sh 'mvn clean test'
+                }
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                junit 'lab6/target/surefire-reports/*.xml'
+            }
+        }
+    }
+}
